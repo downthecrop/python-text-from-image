@@ -13,7 +13,7 @@ time.sleep(2)
 
 while i < count:
     print(winData.readline().strip()+"              "+ubuntuData.readline().strip())
-    time.sleep(.5)
+    time.sleep(1)
     i += 1
 
 print("Done!")

@@ -8,6 +8,11 @@ from matplotlib.animation import FuncAnimation
 plt.style.use('dark_background')
 mpl.rcParams['figure.dpi'] = 300
 
+winData = open("Windows-Nvidia.txt", "r")
+ubuntuData = open("Ubuntu-Nvidia.txt", "r")
+countT = len(ubuntuData.readlines())
+ubuntuData = open("Ubuntu-Nvidia.txt", "r")
+
 
 i = 0
 x_vals = []
@@ -26,7 +31,8 @@ def animate(i):
 
     plt.plot(x, y1, color='#0078d7', label='Windows 10 1809')
     plt.plot(x, y2, color='#e95420', label='Ubuntu 18.04 LTS')
-
+    if i >= 10:
+        print(winData.readline().strip()+"              "+ubuntuData.readline().strip())
     plt.legend(loc='lower left')
     plt.ylim((100, 241))   # set the ylim to bottom, top
     plt.xlim(left=max(0, i-50), right=i+10)

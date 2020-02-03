@@ -1,0 +1,1 @@
+ffmpeg -i NVIDIA-UBUNTU-Vulkan-Maxed.mp4 -vf fps=1 Vulkan-Frames\%d.png

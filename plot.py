@@ -1,12 +1,15 @@
 import random
-from itertools import count
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 from matplotlib.animation import FuncAnimation
 
+F1 = "Windows10.hml_out.txt"
+F2 = "Windows11.hml_out.txt"
+OUT = "out.csv"
+
 def animate(i):
-    data = pd.read_csv('windows-ubuntu.csv')
+    data = pd.read_csv(OUT)
     x = data['x_value']
     y1 = data['total_1']
     y2 = data['total_2']
@@ -14,27 +17,20 @@ def animate(i):
     plt.cla()
 
     plt.plot(x, y1, color='#0078d7', label='Windows 10 1809')
-    plt.plot(x, y2, color='#e95420', label='Ubuntu 18.04 LTS')
+    plt.plot(x, y2, color='#d7003d', label='Windows 11 21H2')
     if i >= 10:
-        print(f1_data.readline().strip()+"              "+f2_data.readline().strip())
+        print(F1_data.readline().strip()+"              "+F2_data.readline().strip())
     plt.legend(loc='lower left')
     plt.ylim((100, 241))   # set the ylim to bottom, top
     plt.xlim(left=max(0, i-50), right=i+10)
     plt.tight_layout()
     i += 1
 
-
-
-f1 = "Ubuntu-Nvidia.txt"
-f2 = "Windows-Nvidia.txt"
-out = "windows-ubuntu.csv"
-
-
-f1_data = open(f1, "r")
-f2_data = open(f2, "r")
-count = len(f2_data.readlines())
-f2_data = open(f2, "r")
-combined = open(out,"w+")
+F1_data = open(F1, "r")
+F2_data = open(F2, "r")
+count = len(F2_data.readlines())
+F2_data = open(F2, "r")
+combined = open(OUT,"w+")
 
 #Header of CSV
 combined.write("x_value,total_1,total_2"+"\n\n")
@@ -45,9 +41,9 @@ while i < count+20:
         # Junk data so the graph doesn't start right away
         combined.write(str(i)+",0,0"+"\n\n")
     else:
-        f1_line = f1_data.readline()
-        f2_line = f2_data.readline()
-        combined.write(str(i)+","+str(f1_line).rstrip('\r\n')+","+str(f2_line)+"\n\n")
+        F1_line = F1_data.readline()
+        F2_line = F2_data.readline()
+        combined.write(str(i)+","+str(F1_line).rstrip('\r\n')+","+str(F2_line)+"\n\n")
     i += 1
 combined.close()
 
